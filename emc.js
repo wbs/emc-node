@@ -35,12 +35,13 @@ var socket = io.listen(server);
 // when we get a message in one of the channels we're subscribed to
 // we send it over to all connected clients
 rc.on("message", function (channel, message) {
-	socket.broadcast(message);
+	console.log("Sending: " + message);
+	socket.sockets.emit('message', message);
 })
 
 // so now, for every client that connects to node
 // though whatever transport (flash, websockets, polling)
-socket.on('connection', function(client) { 
+socket.sockets.on('connection', function(client) { 
  	client.on('message', function() { 
  		// nothin'
  	}), 

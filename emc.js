@@ -5,6 +5,19 @@ io = require('socket.io'),
 redis = require('redis'),
 rc = redis.createClient();
 
+io.configure('production', function(){
+	io.enable('browser client etag');
+	io.set('log level', 1);
+	
+	io.set('transports', [
+	  'websocket'
+	, 'flashsocket'
+	, 'htmlfile'
+	, 'xhr-polling'
+	, 'jsonp-polling'
+	]);
+});
+
 // if redis blows up on us, catch the error
 // and reconnect automagically, which fires 'connect', which subscribes
 // to our channels. meaning: no failures. ever.

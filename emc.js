@@ -48,7 +48,7 @@ var socket = io.listen(server);
 // when we get a message in one of the channels we're subscribed to
 // we send it over to all connected clients
 rc.on("message", function (channel, message) {
-	console.log("Sending: " + message);
+	//console.log("Sending: " + message);
 	socket.sockets.emit('message', message);
 })
 
